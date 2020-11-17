@@ -2,7 +2,7 @@ package bearmaps;
 import java.util.List;
 public class KDTree implements PointSet{
 
-    private List<Point> listofpoints;
+
     private Node root;
 
     private class Node{
@@ -19,7 +19,6 @@ public class KDTree implements PointSet{
     /* the size of the list of points >= 1.*/
     public KDTree(List<Point> points){
         root = new Node(null,null,points.get(0));
-        listofpoints = points;
         this.add(root,points);
     }
     /* add points into KDTree.*/
@@ -64,6 +63,19 @@ public class KDTree implements PointSet{
     }
     @Override
     public Point nearest(double x, double y) {
-        return null;
+        Node best = nearest(this.root,new Point(x,y),this.root);
+        return best.p;
+    }
+
+    /* return a point whose distance from goal is less than best. */
+    private Node nearest(Node n, Point goal, Node best){
+        if(n == null){
+            return best;
+        }else if (Point.distance(n.p,goal) < Point.distance(goal,best.p)){
+            best = n;
+        }
+        best = nearest(n.left,goal,best);
+        best = nearest(n.right,goal,best);
+        return best;
     }
 }
