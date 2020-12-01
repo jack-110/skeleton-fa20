@@ -7,7 +7,6 @@ import java.util.List;
 import java.util.Random;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
 
 public class KDTreeTest {
 
@@ -39,16 +38,18 @@ public class KDTreeTest {
         List<Point> points = generatePoints();
         KDTree kdt = new KDTree(points);
         long start1 = System.currentTimeMillis();
+        System.out.println(kdt.nearest(888,666));
         for(int i = 0; i < 1000000; i++){
-            kdt.nearest(0,0);
+            kdt.nearest(200,200);
         }
         long end1 = System.currentTimeMillis();
-        System.out.println( end1 - start1);
+        System.out.println(end1 - start1);
 
         NaivePointSet naivePointSet = new NaivePointSet(points);
         long start2 = System.currentTimeMillis();
+        System.out.println(naivePointSet.nearest(888,666));
         for(int i = 0; i < 1000000; i++){
-            naivePointSet.nearest(0,0);
+            naivePointSet.nearest(200,200);
         }
         long end2 = System.currentTimeMillis();
         System.out.println( end2 - start2);
