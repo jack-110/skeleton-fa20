@@ -8,6 +8,7 @@ public class NaivePointSet implements PointSet{
     public NaivePointSet(List<Point> Points){
         ListOfPoint = Points;
     }
+
     @Override
     public Point nearest(double x, double y) {
         Point goalpoint = new Point(x,y);

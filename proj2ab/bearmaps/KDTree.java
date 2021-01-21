@@ -5,17 +5,21 @@ import java.util.List;
 public class KDTree implements PointSet{
 
     private Node root;
+
     private class Node implements Comparator<Double> {
+
         private Node right;
         private Node left;
         private Point p;
         int horizontal; // 1 : horizontal; 0 : vertical.
+
         public Node(Node r,Node l,Point point, int orientation){
             right = r;
             left = l;
             horizontal = orientation;
             p = point;
         }
+
         @Override
         /* 1:i>j and 0: i<j.*/
         public int compare(Double i , Double j) {
@@ -31,6 +35,7 @@ public class KDTree implements PointSet{
         root = new Node(null,null,points.get(0),1);
         add(root,points);
     }
+
     /* add points into KDTree.*/
     private void add(Node root,List<Point> points){
         int i = 1;
@@ -39,6 +44,7 @@ public class KDTree implements PointSet{
             i++;
         }
     }
+
     /* add a point into KdTree.*/
     private void add(Node node, Point p){
         switch (node.horizontal){
@@ -50,6 +56,7 @@ public class KDTree implements PointSet{
                 break;
         }
     }
+
     /* if case 1 then go left,else case 0 go to right.*/
     private void addByX(Node node, Point p){
         int comparator = node.compare(node.p.getX(),p.getX());
@@ -71,6 +78,7 @@ public class KDTree implements PointSet{
         }
 
     }
+
     /* if case 1 then go left,else case 0 go to right.*/
     private void addByY(Node node, Point p){
         int comparator = node.compare(node.p.getY(),p.getY());
@@ -151,6 +159,7 @@ public class KDTree implements PointSet{
                 return null;
         }
     }
+
     /**
      * Pruning rules:is there has possible better points in bad side,
      * according from the the distance of two points on the x or y.
