@@ -11,11 +11,9 @@ public class BSTMap<k extends Comparable<k>, v> implements Map61B<k, v> {
         private BST right;
         private BST left;
 
-        public BST(k key, v value, BST right, BST left){
+        public BST(k key, v value){
             this.key = key;
             this.value = value;
-            this.right = right;
-            this.left = left;
         }
     }
 
@@ -77,7 +75,7 @@ public class BSTMap<k extends Comparable<k>, v> implements Map61B<k, v> {
 
     private BST put(k key, v value, BST bst){
         if (bst == null){
-            return new BST(key, value, null, null);
+            return new BST(key, value);
         }
 
         int index = bst.key.compareTo(key);
